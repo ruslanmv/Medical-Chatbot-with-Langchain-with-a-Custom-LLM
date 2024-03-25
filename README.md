@@ -1,5 +1,5 @@
 ## Building a Medical Chatbot with Langchain and custom LLM via API
-
+Hello everyone, today we are going to build a simple  Medical Chatbot by using a Simple Custom LLM.
 This blog post explores how to construct a medical chatbot using Langchain, a library for building conversational AI pipelines, and Milvus, a vector similarity search engine and a remote custom remote LLM via API. The combination allows the chatbot to retrieve relevant information from a medical conversation dataset and leverage a large language model (LLM) service to generate informative responses to user queries.
 
 ###  1. Step 1: Dataset Retrieving 
@@ -125,12 +125,6 @@ Here's the code snippet for the Gradio interface:
 import gradio as gr
 
 def chat(message, history):
-  history = history or []  # Reset history if empty
-  response = rag_chain.invoke(message)
-  history.append((message, response))
-  return history, response
-
-def chat_v1(message, history):
   response = rag_chain.invoke(message)
   return response
 
@@ -143,7 +137,7 @@ with gr.Blocks() as interface:
       generate_button = gr.Button("Ask Me", variant="primary")
   with gr.Row():
     answer_output = gr.Textbox(type="text", label="Answer")
-  generate_button.click(chat_v1, inputs=[text_prompt], outputs=answer_output)
+  generate_button.click(chat, inputs=[text_prompt], outputs=answer_output)
 
 # Launch the Gradio interface
 interface.launch(server_name="0.0.0.0", server_port=7860)
@@ -152,7 +146,7 @@ interface.launch(server_name="0.0.0.0", server_port=7860)
 The code defines two functions:
 
 * **chat:** This function takes a message and conversation history as input, interacts with the Langchain model to generate a response, and updates the history.
-* **chat_v1:** This simplified function directly calls the Langchain model to generate a response for the user's query.
+
 
 Gradio components are then used to create a user interface with:
 
@@ -160,7 +154,7 @@ Gradio components are then used to create a user interface with:
 * A button to trigger the generation of a response.
 * Another text box to display the response from the chatbot.
 
-By clicking the button, users initiate the `chat_v1` function, which interacts with the Langchain model and displays the generated response. Finally, the Gradio interface is launched, making the medical chatbot accessible through a web browser.
+By clicking the button, users initiate the `chat` function, which interacts with the Langchain model and displays the generated response. Finally, the Gradio interface is launched, making the medical chatbot accessible through a web browser.
 
 ## Conclusion
 
