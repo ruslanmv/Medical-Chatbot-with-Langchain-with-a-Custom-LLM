@@ -115,7 +115,7 @@ This section defines the `chat` function, which serves as the interface between 
 * **MyCustomLLM:** This class inherits from Langchain's `BaseLLM` class. It overrides the `_generate` method to call the `custom_llm` function (defined earlier) and convert the response into the LLMResult format expected by Langchain.
 * **rag_chain:** An instance of `MyCustomLLM` is created, essentially creating a Langchain model that utilizes the custom LLM functionality.
 
-## 6. Create a Gradio Interface and Conclusion
+## 6. Create a Gradio Interface
 
 The final step involves creating a user-friendly interface for interacting with the medical chatbot. This is achieved using Gradio, a library for building web interfaces for machine learning models.
 
